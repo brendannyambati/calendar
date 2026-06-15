@@ -1,7 +1,7 @@
 
 const App = () => {
   return (
-    <p>Hey Friend</p>
+    <p>Hey Friend!!!</p>
   );
 };
 
