@@ -14,7 +14,8 @@ export class AppService {
     return {
       name: 'dummy',
       data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      animals: ['cats', 'dogs', 'birds']
+      animals: ['cats', 'dogs', 'birds'],
+      things: ['car', 'keys', 'house', 'more things']
     }
   };
 }
