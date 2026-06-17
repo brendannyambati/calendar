@@ -6,6 +6,4 @@ export interface HealthResponse {
 export interface DummyData {
     name: string,
     data: Object,
-    animals: Object,
-    things: Object
 };
