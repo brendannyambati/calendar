@@ -19,6 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Debug secrets
+        run: |
+          echo "AWS key exists: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
+          echo "AWS secret exists: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
+
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
