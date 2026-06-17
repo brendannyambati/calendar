@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import type { HealthResponse } from './app.interfaces';
+import type { DummyData, HealthResponse } from './app.interfaces';
 
 @Controller()
 export class AppController {
@@ -16,4 +16,8 @@ export class AppController {
     return this.appService.getHealth();
   }
   
+  @Get('dummy')
+  getDummyData(): DummyData {
+    return this.appService.getDummyData();
+  }
 }

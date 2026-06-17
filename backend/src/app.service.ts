@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { HealthResponse } from './app.interfaces';
+import { DummyData, HealthResponse } from './app.interfaces';
 
 @Injectable()
 export class AppService {
@@ -8,5 +8,12 @@ export class AppService {
       status: '200',
       timestamp: new Date().toISOString()
     };
+  };
+
+  getDummyData = (): DummyData => {
+    return {
+      name: 'dummy',
+      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    }
   };
 }
