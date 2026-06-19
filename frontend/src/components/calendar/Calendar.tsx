@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { Day } from './Day';
+import type { CalendarEvent } from '../../interfaces';
+
 
 export const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/events`)
+      .then((res) => res.json())
+      .then((data) => setEvents(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -60,7 +70,7 @@ export const Calendar: React.FC = () => {
           </Typography>
           <Button onClick={() => changeMonth(1)}>Next</Button>
         </Box>
-        <Box sx={{ width: '80px' }} /> {/* Spacer to balance the layout */}
+        <Box sx={{ width: '80px' }} />
       </Box>
 
       <Grid container>
@@ -84,7 +94,37 @@ export const Calendar: React.FC = () => {
                 item.isCurrentMonth &&
                 item.day === today.getDate()
               }
-            />
+            >
+              {events
+                .filter((event) => {
+                  const startDate = new Date(event.startDate);
+                  return (
+                    startDate.getFullYear() === year &&
+                    startDate.getMonth() === month &&
+                    startDate.getDate() === item.day
+                  );
+                })
+                .map((event) => (
+                  <Typography
+                    key={event.id}
+                    variant="caption"
+                    sx={{
+                      display: 'block',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      bgcolor: event.color || 'primary.light',
+                      color: 'white',
+                      mb: 0.5,
+                      px: 0.5,
+                      borderRadius: 1,
+                      fontSize: '0.7rem',
+                    }}
+                  >
+                    {event.title}
+                  </Typography>
+                ))}
+            </Day>
           </Grid>
         ))}
       </Grid>

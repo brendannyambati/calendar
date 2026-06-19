@@ -7,9 +7,10 @@ interface DayProps {
   day: number;
   isToday: boolean;
   isCurrentMonth: boolean;
+  children?: React.ReactNode;
 }
 
-export const Day: React.FC<DayProps> = ({ day, isToday, isCurrentMonth }) => {
+export const Day: React.FC<DayProps> = ({ day, isToday, isCurrentMonth, children }) => {
   return (
     <Paper
       variant="outlined"
@@ -17,7 +18,7 @@ export const Day: React.FC<DayProps> = ({ day, isToday, isCurrentMonth }) => {
       sx={{
         padding: 1,
         textAlign: 'left',
-        minHeight: '80px',
+        minHeight: '120px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
@@ -37,11 +38,15 @@ export const Day: React.FC<DayProps> = ({ day, isToday, isCurrentMonth }) => {
           justifyContent: 'center',
           backgroundColor: isToday ? 'primary.main' : 'transparent',
           color: isToday ? 'primary.contrastText' : 'inherit',
+          mb: 1,
         }}
       >
         <Typography variant="body1" sx={{ fontWeight: isToday ? 'bold' : 'normal' }}>
           {day}
         </Typography>
+      </Box>
+      <Box sx={{ width: '100%', overflowY: 'auto' }}>
+        {children}
       </Box>
     </Paper>
   );
