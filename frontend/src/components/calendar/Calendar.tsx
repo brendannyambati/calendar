@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { Day } from './Day';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import type { CalendarEvent } from '../../interfaces';
 
-
 export const Calendar: React.FC = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const { year, month } = useSelector((state: RootState) => state.calendar);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
 
   useEffect(() => {
@@ -18,17 +18,6 @@ export const Calendar: React.FC = () => {
       .then((data) => setEvents(data))
       .catch((err) => console.error(err));
   }, []);
-
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-
-  const changeMonth = (delta: number) => {
-    setCurrentDate(new Date(year, month + delta, 1));
-  };
-
-  const goToToday = () => {
-    setCurrentDate(new Date());
-  };
 
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -59,20 +48,6 @@ export const Calendar: React.FC = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Box>
-          <Button onClick={goToToday}>Today</Button>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-          <Button onClick={() => changeMonth(-1)}>Prev</Button>
-          <Typography variant="h5" sx={{ minWidth: '150px', textAlign: 'center' }}>
-            {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-          </Typography>
-          <Button onClick={() => changeMonth(1)}>Next</Button>
-        </Box>
-        <Box sx={{ width: '80px' }} />
-      </Box>
-
       <Grid container>
         {weekDays.map((day) => (
           <Grid key={day} size={{ xs: 12 / 7 }}>
