@@ -1,4 +1,5 @@
 const Events = () => {
+    // events page
     return <div>Events</div>
 };
 
