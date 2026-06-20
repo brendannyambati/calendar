@@ -1,6 +1,5 @@
-import React from 'react';
-
 const Events = () => {
+    // events page
     return <div>Events</div>
 };
 
