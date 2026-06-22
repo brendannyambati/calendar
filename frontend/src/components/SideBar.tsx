@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { CalendarMonth, Task, Settings, Help, Person } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 

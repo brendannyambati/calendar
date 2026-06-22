@@ -11,7 +11,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { setMonthYear, resetToToday } from '../store/calendarSlice';
-import { CalendarMonth, Task } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const arrowStyles = {
