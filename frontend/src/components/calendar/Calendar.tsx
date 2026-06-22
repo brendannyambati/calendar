@@ -44,21 +44,21 @@ export const Calendar: React.FC = () => {
   const today = new Date();
   const isCurrentMonthView = today.getFullYear() === year && today.getMonth() === month;
 
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container>
+    <Box sx={{ flexGrow: 1, height: '100%', p: 2 }}>
+      <Grid container sx={{ height: '40px' }}>
         {weekDays.map((day) => (
           <Grid key={day} size={{ xs: 12 / 7 }}>
-            <Paper variant="outlined" square sx={{ textAlign: 'center', p: 1, bgcolor: 'background.default' }}>
+            <Paper square sx={{ textAlign: 'center', p: 1, bgcolor: 'background.default' }}>
               <Typography variant="subtitle2">{day}</Typography>
             </Paper>
           </Grid>
         ))}
       </Grid>
 
-      <Grid container>
+      <Grid container sx={{ height: 'calc(100% - 40px)' }}>
         {days.map((item, index) => (
           <Grid key={index} size={{ xs: 12 / 7 }}>
             <Day

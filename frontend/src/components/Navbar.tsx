@@ -16,14 +16,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 const arrowStyles = {
   color: 'white',
-  border: '1px solid white',
+  background: '#003e6a',
   width: '30px',
   height: '30px'
 };
 
 const todayButtonStyles = {
-  borderColor: 'white',
   color: 'white',
+  background: '#003e6a',
   borderRadius: '5px',
   width: '150px',
   height: '30px',
@@ -46,58 +46,42 @@ export const Navbar = () => {
 
   const dateString = new Date(year, month, 1).toLocaleString('default', { month: 'long', year: 'numeric' });
   const isCalendarPage = location.pathname === '/';
-  const isEventsPage = location.pathname === '/events';
-
-  const calendarButtonStyles = isCalendarPage
-    ? { border: '1px solid white', borderRadius: '5px', background: 'white' }
-    : { border: '1px solid white', borderRadius: '5px' };
-
-  const taskButtonStyles = isEventsPage
-    ? { border: '1px solid white', borderRadius: '5px', background: 'white' }
-    : { border: '1px solid white', borderRadius: '5px' };
 
   return (
     <>
       <CssBaseline />
-      <AppBar position="static" sx={{ bgcolor: '#2563eb', mb: 0 }} elevation={0}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-start', gap: 3}}>
-            <IconButton sx={calendarButtonStyles} onClick={() => navigate('/')} disableRipple={true}>
-              <CalendarMonth sx={{ color: isCalendarPage ? '#2563eb' : 'white' }} />
-              </IconButton>
-            <IconButton sx={taskButtonStyles} onClick={() => navigate('/events')} disableRipple={true}>
-              <Task sx={{ color: isEventsPage ? '#2563eb' : 'white' }} />
-              </IconButton>
-          </Box>
-
-          {!isEventsPage && (
-            <Box sx={{ flex: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
+      <AppBar position="static" sx={{ bgcolor: 'white', mb: 0, minHeight: '40px' }} elevation={0}>
+        {/* <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', minHeight: '40px !important' }}> */}
+        <Toolbar sx={{ display: 'flex', justifyContent: 'right', minHeight: '40px !important' }} >
+          {isCalendarPage && (
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
+              <div style={{ background: 'red' }}/>
               <Button 
                 variant="outlined" 
                 color="inherit" 
                 onClick={goToToday} 
-                sx={{ ...todayButtonStyles, flexShrink: 0 }}
+                sx={{ ...todayButtonStyles, flexShrink: 0, py: 0.5, px: 1 }}
               >
                 Today
               </Button>
-              <Box sx={{ width: '50%'}}>
-                <Typography variant="h4" sx={{ minWidth: '220px', textAlign: 'center', flexShrink: 0 }}>
+              <Box>
+                <Typography variant="h6" sx={{ minWidth: '220px', textAlign: 'center', flexShrink: 0, color: 'black' }}>
                 {dateString}
               </Typography>
               </Box>
               <Box sx={{ display: 'flex', flexShrink: 0 }}>
-                <IconButton onClick={() => changeMonth(-1)} sx={{ ...arrowStyles, mr: 1 }}>
-                  <ChevronLeftIcon />
+                <IconButton disableRipple onClick={() => changeMonth(-1)} sx={{ ...arrowStyles, mr: 1, p: 0.5 }}>
+                  <ChevronLeftIcon sx={{ fontSize: 20 }} />
                 </IconButton>
-                <IconButton onClick={() => changeMonth(1)} sx={arrowStyles}>
-                  <ChevronRightIcon />
+                <IconButton disableRipple onClick={() => changeMonth(1)} sx={{ ...arrowStyles, p: 0.5 }}>
+                  <ChevronRightIcon sx={{ fontSize: 20 }} />
                 </IconButton>
               </Box>
             </Box>
           )}
           
-          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', }}>
-            <Avatar sx={{ bgcolor: 'white', color: '#2563eb'}}>U</Avatar>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Avatar sx={{ bgcolor: '#003e6a', color: 'white', width: 32, height: 32, fontSize: '0.875rem' }}>U</Avatar>
           </Box>
         </Toolbar>
 
