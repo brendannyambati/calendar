@@ -11,7 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { setMonthYear, resetToToday } from '../store/calendarSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const arrowStyles = {
   color: 'white',
@@ -31,7 +31,6 @@ const todayButtonStyles = {
 export const Navbar = () => {
   const { year, month } = useSelector((state: RootState) => state.calendar);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
 
   const changeMonth = (delta: number) => {
