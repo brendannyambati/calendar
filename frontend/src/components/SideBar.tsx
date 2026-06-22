@@ -78,10 +78,10 @@ const SideBar = () => {
     <Box
       sx={{
         maxWidth: 100,
-        bgcolor: 'black',
+        bgcolor: '#003e6a',
         color: 'white',
         height: '100vh',
-        p: 1,
+        p: '70px 10px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
